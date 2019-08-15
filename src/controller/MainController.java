@@ -66,8 +66,13 @@ public class MainController {
 	// process payment for client
 	public int pay (PaymentRequest request) throws OperationNotPermittedException {
 		
-		validateRequest(request.clientId, TransactionState.DESCRIBE);
-		return pcontroller.process(request.clientId, pmanager.get(request.productId, request.size), request.tender);
+		validateRequest(request.clientId, TransactionState.PAY);
+		int resp = pcontroller.process(request.clientId, pmanager.get(request.productId, request.size), request.tender);
+		
+		if (resp >= 0)
+			tmanager.update(request.clientId, TransactionState.PAY_SUCCESS);
+		
+		return resp;
 	}
 	
 	/**
