@@ -1,0 +1,9 @@
+/**
+ * 
+ */
+/**
+ * @author akshar
+ *
+ */
+module VendingMachine {
+}
